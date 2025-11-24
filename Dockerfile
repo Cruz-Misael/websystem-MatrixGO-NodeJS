@@ -1,20 +1,20 @@
-# Imagem base leve
+# Base image for a lightweight Node.js environment
 FROM node:18-alpine
 
-# Diretório de trabalho
+# Set the working directory inside the container
 WORKDIR /app
 
-# Copiar package.json
+# Copy dependency definition files
 COPY package.json package-lock.json* ./
 
-# Instalar dependências
+# Install project dependencies for production
 RUN npm install --production
 
-# Copiar o restante do código
+# Copy the rest of the application source code
 COPY ./src ./src
 
-# Expor a porta da API
+# Expose the API port
 EXPOSE 3001
 
-# Comando de execução
+# Command to run the application when the container starts
 CMD ["npm", "start"]
